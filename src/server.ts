@@ -5,10 +5,13 @@ import cors from 'cors';
 import Router from './Routes/Router';
 import path from 'path';
 import { MulterError } from 'multer';
+import { mongoConnect } from './Database/mongo';
 
 dotenv.config();
 
 const server = express();
+
+mongoConnect();
 
 server.use(cors());
 server.use(fileUpload());
