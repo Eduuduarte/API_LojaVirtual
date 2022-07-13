@@ -22,5 +22,15 @@ export const signup = checkSchema({
 });
 
 export const signin = checkSchema ({
-
+    email: {
+        isEmail: true,
+        normalizeEmail: true,
+        errorMessage: 'Email inválido'
+    },
+    password: {
+        isLength: {
+            options: {min: 2}
+        },
+        errorMessage: 'Senha precisa ter pelo menos 2 carecteres'
+    }
 });
