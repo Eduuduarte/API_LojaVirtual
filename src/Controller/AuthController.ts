@@ -19,6 +19,17 @@ export const signup = async (req: Request, res: Response) => {
     res.json({newUser})
 }
 
-export const signin = (req: Request, res: Response) => {
+export const signin = async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        res.json({error: errors.mapped});
+        return;
+    }
     
+    const data = matchedData(req);
+
+    const login = await AuthService.loginUser(data.email, data.password);
+
+    res.status(201);
+    res.json({login});
 }
