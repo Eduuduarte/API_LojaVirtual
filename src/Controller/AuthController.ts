@@ -1,8 +1,6 @@
 import {Request, Response} from 'express';
 import { validationResult, matchedData } from 'express-validator';
 import * as AuthService from '../Service/AuthService';
-import User from '../Model/User';
-import dotenv from 'dotenv';
 
 export const signup = async (req: Request, res: Response) => {
     const errors = validationResult(req);
