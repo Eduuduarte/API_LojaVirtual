@@ -1,16 +1,16 @@
 import {Schema, connection, model, modelNames} from 'mongoose';
 
 type UserDataType = {
-    id_user: number,
+    id_user: string,
     full_name: string,
     cpf: number,
     phone: number,
-    born_date: Date
+    born_date: string
 }
 
 const schema = new Schema<UserDataType>({
     id_user: {
-        type: Number,
+        type: String,
         required: true
     },
     full_name: {
@@ -25,7 +25,7 @@ const schema = new Schema<UserDataType>({
         type: Number,
         required: true
     },
-    born_date: {type: Date}
+    born_date: {type: String}
 });
 
 const modelName: string = "UserData";
