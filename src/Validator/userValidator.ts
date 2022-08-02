@@ -34,3 +34,15 @@ export const signin = checkSchema ({
         errorMessage: 'Senha precisa ter pelo menos 2 carecteres'
     }
 });
+
+export const info = checkSchema ({
+    token: {
+        notEmpty: true,
+        isLength: {
+            options: {
+                min: 2
+            }
+        },
+        errorMessage: "Preencha o token!"
+    }
+});

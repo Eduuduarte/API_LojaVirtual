@@ -30,3 +30,17 @@ export const addNewData = async (id_user: string, token: string, full_name: stri
     return myData;
 
 }
+
+export const getData = async (token: string) => {
+    const user = await User.findOne({token});
+
+    if(!user?.id) {
+        return "Usuário não existe";
+    }
+
+
+    const data = await UserData.findOne({id_user: user.id});
+
+    return data;
+
+}

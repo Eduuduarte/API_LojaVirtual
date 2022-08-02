@@ -20,7 +20,7 @@ export const signup = async (req: Request, res: Response) => {
 export const signin = async (req: Request, res: Response) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-        res.json({error: errors.mapped});
+        res.json({error: errors.mapped()});
         return;
     }
     

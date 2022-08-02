@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
+import { validationResult, matchedData } from 'express-validator';
 import * as UserService from '../Service/UserService';
-import User from '../Model/User';
 
 export const addData = async (req: Request, res: Response) => {
     let {id, token, full_name, cpf, phone, born_date} = req.body;
@@ -12,4 +12,12 @@ export const addData = async (req: Request, res: Response) => {
 
     res.status(201);
     res.json({newInfo});
+}
+
+export const infoData = async (req: Request, res: Response) => {
+    let { token } = req.query;
+
+    const info = await UserService.getData(token as string);
+
+    res.json({info});
 }
