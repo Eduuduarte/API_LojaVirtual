@@ -36,13 +36,11 @@ export const signin = checkSchema ({
 });
 
 export const info = checkSchema ({
-    token: {
-        notEmpty: true,
+    phone: {
         isLength: {
             options: {
-                min: 2
+                min: 11
             }
-        },
-        errorMessage: "Preencha o token!"
+        }
     }
 });

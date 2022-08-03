@@ -44,3 +44,19 @@ export const getData = async (token: string) => {
     return data;
 
 }
+
+export const updatePhone = async (token: string, phone: number) => {
+    let user = await User.findOne({token});
+
+    let userData = await UserData.findOne({phone});
+
+
+    if(userData?.phone){
+        return "Telefone já cadastrado!";
+    }
+
+    let update = await UserData.findOneAndUpdate({id_user: user?.id}, {phone});
+
+    return update;
+
+}

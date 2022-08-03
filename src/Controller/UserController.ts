@@ -21,3 +21,18 @@ export const infoData = async (req: Request, res: Response) => {
 
     res.json({info});
 }
+
+export const editPhone = async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        res.json({ error: errors.mapped()});
+        return;
+    }
+
+    let {token, phone = 0} = req.query;
+
+    const edit = await UserService.updatePhone(token as string, phone as number);
+    
+
+    res.json({edit});
+}

@@ -15,5 +15,6 @@ router.post('/user/signin', userValidator.signin, AuthController.signin);
 
 router.post('/user/data', UserController.addData);
 router.get('/user/data', Auth, UserController.infoData);
+router.put('/user/data',Auth, userValidator.info, UserController.editPhone);
 
 export default router;
