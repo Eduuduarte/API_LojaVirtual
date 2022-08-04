@@ -57,6 +57,6 @@ export const updatePhone = async (token: string, phone: number) => {
 
     let update = await UserData.findOneAndUpdate({id_user: user?.id}, {phone});
 
-    return update;
+    return `{Id_user: ${update?.id_user}, phone: ${phone} }`;
 
 }
