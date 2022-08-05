@@ -31,3 +31,22 @@ export const signin = async (req: Request, res: Response) => {
     res.status(201);
     res.json({login});
 }
+
+export const changePs = async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        res.json({error: errors.mapped()});
+        return;
+    }
+
+    const data = matchedData(req);
+
+    if(data.password != data.passwordAgain) {
+        res.json({error: "as senhas precisa ser iguais!"})
+    }
+
+    console.log(data.token);
+    const changePassword = await AuthService.replacePs(data.token, data.password);
+
+    res.json({changePassword});
+}

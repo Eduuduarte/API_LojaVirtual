@@ -35,6 +35,28 @@ export const signin = checkSchema ({
     }
 });
 
+export const change = checkSchema ({
+    token: {
+        trim: true,
+        isLength: {
+            options: {min: 2}
+        },
+        errorMessage: "token inválido"
+    },
+    password: {
+        isLength: {
+            options: {min: 2}
+        },
+        errorMessage: 'Senha precisa ter pelo menos 2 carecteres'
+    },
+    passwordAgain: {
+        isLength: {
+            options: {min: 2}
+        },
+        errorMessage: 'Senha precisa ter pelo menos 2 carecteres'
+    }
+})
+
 export const info = checkSchema ({
     phone: {
         isLength: {

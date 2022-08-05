@@ -44,3 +44,23 @@ export const loginUser = async (email: string, passwordHash: string) => {
 
     return token;
 }
+
+export const replacePs = async (token: string, newPassword: string) => {
+    const user = await User.findOne({token});
+    const payload = (Date.now() + Math.random()).toString();
+    token = ( await bcrypt.hash(payload, 10)).toString();
+
+    console.log(user);
+
+    if(!user?.id) {
+        return "Usuário inexistente!"
+    }
+
+    
+    const passwordHash = (await bcrypt.hash(newPassword, 10)).toString();
+
+
+    let update = await User.findOneAndUpdate({_id: user.id}, {passwordHash, token});
+
+    return update;
+}

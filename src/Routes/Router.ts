@@ -12,6 +12,7 @@ router.get('/ping', (req, res) => {
 
 router.post('/user/signup', userValidator.signup, AuthController.signup);
 router.post('/user/signin', userValidator.signin, AuthController.signin);
+router.post('/user/change',userValidator.change, AuthController.changePs);
 
 router.post('/user/data', UserController.addData);
 router.get('/user/data', Auth, UserController.infoData);
