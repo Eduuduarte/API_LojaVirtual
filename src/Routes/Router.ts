@@ -3,6 +3,7 @@ import { Auth } from "../Middlewares/Auth";
 import * as AuthController from '../Controller/AuthController';
 import * as UserController from '../Controller/UserController';
 import * as userValidator  from '../Validator/userValidator';
+import * as AddressController from '../Controller/AddressController';
 
 const router = Router();
 
@@ -16,6 +17,10 @@ router.post('/user/change',userValidator.change, AuthController.changePs);
 
 router.post('/user/data', UserController.addData);
 router.get('/user/data', Auth, UserController.infoData);
-router.put('/user/data',Auth, userValidator.info, UserController.editPhone);
+router.put('/user/data', Auth, userValidator.info, UserController.editPhone);
+
+router.get('/address', Auth, AddressController.getAddress);
+router.post('/address', Auth, AddressController.addAddress);
+router.put('/address/:id', Auth, AddressController.editAddress);
 
 export default router;

@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-type AdressType = {
+type AddressType = {
     id_user: string,
     zipcode: number,
     city: string,
@@ -9,7 +9,7 @@ type AdressType = {
     street_number: number
 }
 
-const schema = new Schema<AdressType>({
+const schema = new Schema<AddressType>({
     id_user: {
         type: String,
         required: true
@@ -37,6 +37,6 @@ const schema = new Schema<AdressType>({
 
 });
 
-const modelName: string = 'Adress';
+const modelName: string = 'Address';
 
 export default model(modelName, schema);
