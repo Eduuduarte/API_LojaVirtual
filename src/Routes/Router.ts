@@ -22,5 +22,7 @@ router.put('/user/data', Auth, userValidator.info, UserController.editPhone);
 router.get('/address', Auth, AddressController.getAddress);
 router.post('/address', Auth, AddressController.addAddress);
 router.put('/address/:id', Auth, AddressController.editAddress);
+router.delete('/address/:id', Auth, AddressController.delAddress);
+
 
 export default router;

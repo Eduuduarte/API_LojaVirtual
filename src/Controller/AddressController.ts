@@ -40,3 +40,12 @@ export const editAddress = async (req: Request, res: Response) => {
 
     res.json({edit});
 }
+
+export const delAddress = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { token } = req.query;
+
+    const del = await AddressService.deleteAddress(id as string, token as string);
+
+    res.json({del});
+}

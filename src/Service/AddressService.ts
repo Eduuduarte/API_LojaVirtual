@@ -37,8 +37,6 @@ export const newAddress = async (zipcode: number, city: string, state: string, s
         return "Endereço já cadastrado!"
     }
 
-    console.log(checkAddress);
-
     const addAddress = new Address();
     addAddress.zipcode = zipcode;
     addAddress.city = city;
@@ -77,4 +75,24 @@ export const changeAddress = async (id: string, zipcode: number, city: string, s
     let AdrressUp = await Address.findById(id);
 
     return AdrressUp;
+}
+
+export const deleteAddress = async (id: string, token: string) => {
+    const address = await Address.findById(id);
+    const user = await User.findOne({token});
+
+    const idUser = user?._id;
+    const idAddress = address?._id;
+
+    if(idUser === undefined || idAddress === undefined) {
+        return "dados informados não existe!"
+    }
+
+    if(user?._id != address?.id_user) {
+        return "Endereço informado não pertence ao usuário";
+    }
+
+    const del = await Address.findByIdAndDelete(id);
+
+    return `${del}, {mensagem: success}`;
 }
