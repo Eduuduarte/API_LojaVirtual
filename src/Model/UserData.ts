@@ -1,4 +1,4 @@
-import {Schema, connection, model, modelNames} from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 type UserDataType = {
     id_user: string,
