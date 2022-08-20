@@ -11,7 +11,6 @@ const schema = new Schema<CategoryType>({
     }
 });
 
-const modelName: string = 'Category';
-
+const modelName: string = 'Categories';
 
 export default model(modelName, schema);
