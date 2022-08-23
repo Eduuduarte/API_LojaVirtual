@@ -5,6 +5,7 @@ import * as UserController from '../Controller/UserController';
 import * as userValidator  from '../Validator/userValidator';
 import * as AddressController from '../Controller/AddressController';
 import * as CategoryController from '../Controller/CategoryController';
+import * as ProductController from '../Controller/ProductController';
 
 const router = Router();
 
@@ -27,6 +28,9 @@ router.delete('/address/:id', Auth, AddressController.delAddress);
 
 router.get('/category', CategoryController.getCategory);
 router.post('/category', CategoryController.addCategory);
+
+router.get('/product', ProductController.getProduct);
+router.post('/product', ProductController.addProduct);
 
 
 export default router;
