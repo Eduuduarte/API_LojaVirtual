@@ -1,8 +1,29 @@
 import Product from "../Model/Product";
 import Category from "../Model/Category";
 
-export const catchProduct = () => {
+interface filter {
+    id_category: string;
+    status: string;
+}
 
+export const catchProduct = async (id_category: string, status: string) => {
+    const cat = await Category.findById(id_category);
+    let filter: Partial<filter> = {};
+
+    if(!cat?.id && id_category) {
+        return "Categoria não existe!"
+    }
+    if(id_category) {
+        filter.id_category = id_category;
+    }
+
+    if(status) {
+        filter.status = status;
+    }
+
+    const list = await Product.find(filter);
+
+    return list;
 }
 
 export const includeProduct = async (id_category: string, description: string, price: number, status: string, amount: number, image: string, localization: string, discount: boolean, valueDiscount: number) => {

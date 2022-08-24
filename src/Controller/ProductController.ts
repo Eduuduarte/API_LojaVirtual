@@ -2,7 +2,12 @@ import { Request, Response } from 'express';
 import * as ProductService from '../Service/ProductService';
 
 export const getProduct = async (req: Request, res: Response) => {
+    const {id_category, status} = req.query;
+    console.log(id_category, status);
 
+    const products = await ProductService.catchProduct(id_category as string, status as string);
+
+    res.json({products});
 }
 
 export const addProduct = async (req: Request, res: Response) => {
