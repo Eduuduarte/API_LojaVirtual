@@ -6,7 +6,7 @@ export const getProduct = async (req: Request, res: Response) => {
 }
 
 export const addProduct = async (req: Request, res: Response) => {
-    const {
+    let {
         id_category,
         description,
         price = 0,
@@ -18,6 +18,10 @@ export const addProduct = async (req: Request, res: Response) => {
         valueDiscount = 0
     } = req.query;
 
+    if (valueDiscount != 0) {
+        discount = true;
+    }
+
     const add = await ProductService.includeProduct(
         id_category as string,
         description as string,
@@ -28,9 +32,12 @@ export const addProduct = async (req: Request, res: Response) => {
         localization as string,
         discount as boolean,
         valueDiscount as number
-        );
-    
+    );
 
-    res.json({add});
+
+
+
+
+    res.json({ add });
 }
 
