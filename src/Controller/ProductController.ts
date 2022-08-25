@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as ProductService from '../Service/ProductService';
+import Product from '../Model/Product';
 
 export const getProduct = async (req: Request, res: Response) => {
     const {id_category, status} = req.query;
@@ -8,6 +9,17 @@ export const getProduct = async (req: Request, res: Response) => {
     const products = await ProductService.catchProduct(id_category as string, status as string);
 
     res.json({products});
+}
+
+export const getOnlyProduct = async (req: Request, res: Response) => {
+    const {id} = req.params;
+
+    let product;
+    if(id.length == 24){
+        product = await Product.findById(id);
+    }
+
+    res.json({product});
 }
 
 export const addProduct = async (req: Request, res: Response) => {

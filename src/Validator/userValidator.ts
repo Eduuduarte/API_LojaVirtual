@@ -66,3 +66,14 @@ export const info = checkSchema ({
         }
     }
 });
+
+export const onlyProduct = checkSchema ({
+    id: {
+        isLength : {
+            options: {
+                min: 24
+            }
+        },
+        errorMessage: "Id inválido."
+    }
+})
