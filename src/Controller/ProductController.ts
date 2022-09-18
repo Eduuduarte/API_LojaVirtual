@@ -32,8 +32,9 @@ export const addProduct = async (req: Request, res: Response) => {
         image,
         localization,
         discount = false,
-        valueDiscount = 0
-    } = req.query;
+        valueDiscount = 0,
+        infoProduct
+    } = req.body;
 
     if (valueDiscount != 0) {
         discount = true;
@@ -48,12 +49,9 @@ export const addProduct = async (req: Request, res: Response) => {
         image as string,
         localization as string,
         discount as boolean,
-        valueDiscount as number
+        valueDiscount as number,
+        infoProduct as object
     );
-
-
-
-
 
     res.json({ add });
 }

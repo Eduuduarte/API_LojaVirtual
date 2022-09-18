@@ -33,5 +33,4 @@ router.get('/product', ProductController.getProduct);
 router.get('/product/:id',userValidator.onlyProduct, ProductController.getOnlyProduct);
 router.post('/product', ProductController.addProduct);
 
-
 export default router;

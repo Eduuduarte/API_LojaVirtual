@@ -11,7 +11,8 @@ type ProductType = {
     image: string;
     localization: string;
     discount: boolean;
-    valueDiscount: number; 
+    valueDiscount: number;
+    infoProduct: object; 
 }
 
 const schema = new Schema<ProductType>({
@@ -52,6 +53,9 @@ const schema = new Schema<ProductType>({
     },
     valueDiscount: {
         type: Number
+    },
+    infoProduct: {
+        type: Object
     }
 });
 

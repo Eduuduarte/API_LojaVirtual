@@ -26,7 +26,7 @@ export const catchProduct = async (id_category: string, status: string) => {
     return list;
 }
 
-export const includeProduct = async (id_category: string, description: string, price: number, status: string, amount: number, image: string, localization: string, discount: boolean, valueDiscount: number) => {
+export const includeProduct = async (id_category: string, description: string, price: number, status: string, amount: number, image: string, localization: string, discount: boolean, valueDiscount: number, infoProduct: object) => {
     const cat = await Category.findById(id_category);
 
     let message;
@@ -46,6 +46,7 @@ export const includeProduct = async (id_category: string, description: string, p
     newProduct.valueDiscount = !valueDiscount ? 0 : valueDiscount;
     newProduct.star = 0;
     newProduct.views = 0;
+    newProduct.infoProduct = infoProduct;
 
     const addProduct = await newProduct.save();
 
