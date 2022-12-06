@@ -1,7 +1,7 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, ObjectId, isValidObjectId } from "mongoose";
 
 type ProductType = {
-    id_category: string;
+    id_category: ObjectId;
     description: string;
     price: number;
     status: string;
@@ -17,7 +17,7 @@ type ProductType = {
 
 const schema = new Schema<ProductType>({
     id_category: {
-        type: String,
+        type: Object,
         required: true
     },
     description: {

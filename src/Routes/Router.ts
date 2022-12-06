@@ -30,7 +30,7 @@ router.get('/category', CategoryController.getCategory);
 router.post('/category', CategoryController.addCategory);
 
 router.get('/product', ProductController.getProduct);
-router.get('/product/:id',userValidator.onlyProduct, ProductController.getOnlyProduct);
-router.post('/product', ProductController.addProduct);
+router.get('/product/:id', ProductController.getOnlyProduct);
+router.post('/product', userValidator.addProduct, ProductController.addProduct);
 
 export default router;

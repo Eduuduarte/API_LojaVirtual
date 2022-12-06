@@ -76,4 +76,15 @@ export const onlyProduct = checkSchema ({
         },
         errorMessage: "Id inválido."
     }
+});
+
+export const addProduct = checkSchema ({
+    id_category: {
+        isLength : {
+            options: {
+                min: 24
+            }
+        },
+        errorMessage: "Id inválido."
+    }
 })

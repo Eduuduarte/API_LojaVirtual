@@ -1,5 +1,6 @@
 import Product from "../Model/Product";
 import Category from "../Model/Category";
+import { ObjectId } from "mongoose";
 
 interface filter {
     id_category: string;
@@ -26,8 +27,21 @@ export const catchProduct = async (id_category: string, status: string) => {
     return list;
 }
 
-export const includeProduct = async (id_category: string, description: string, price: number, status: string, amount: number, image: string, localization: string, discount: boolean, valueDiscount: number, infoProduct: object) => {
-    const cat = await Category.findById(id_category);
+export const includeProduct = async (
+    id_category: ObjectId, 
+    description: string, 
+    price: number, status: string, 
+    amount: number, image: string, 
+    localization: string, 
+    discount: boolean, 
+    valueDiscount: number, 
+    infoProduct: object) => {
+
+    const descriptionProduct = await Product.findOne({description});
+
+    if(descriptionProduct) {
+        return "Produto já cadastrado!"
+    }
 
     let message;
     if (valueDiscount > 1 || valueDiscount < 0) {
