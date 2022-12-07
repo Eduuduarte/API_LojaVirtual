@@ -45,8 +45,7 @@ export const addProduct = async (req: Request, res: Response) => {
     }
 
     const id = id_category;
-    console.log(id.length);
-
+    
     if(id.length == 24) {
         const cat = await Category.findById(id);
         if(cat) {

@@ -6,6 +6,7 @@ import * as userValidator  from '../Validator/userValidator';
 import * as AddressController from '../Controller/AddressController';
 import * as CategoryController from '../Controller/CategoryController';
 import * as ProductController from '../Controller/ProductController';
+import * as WishControler from '../Controller/WishController';
 
 const router = Router();
 
@@ -31,6 +32,9 @@ router.post('/category', CategoryController.addCategory);
 
 router.get('/product', ProductController.getProduct);
 router.get('/product/:id', ProductController.getOnlyProduct);
-router.post('/product', userValidator.addProduct, ProductController.addProduct);
+router.post('/product', ProductController.addProduct);
+
+router.get('/wish', WishControler.getWishList);
+router.post('/wish/:id_user/:id_product', userValidator.verifyId, WishControler.addInWishList);
 
 export default router;
