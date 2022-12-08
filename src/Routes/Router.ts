@@ -3,6 +3,7 @@ import { Auth } from "../Middlewares/Auth";
 import * as AuthController from '../Controller/AuthController';
 import * as UserController from '../Controller/UserController';
 import * as userValidator  from '../Validator/userValidator';
+import * as IdValidator from '../Validator/IdValidator';
 import * as AddressController from '../Controller/AddressController';
 import * as CategoryController from '../Controller/CategoryController';
 import * as ProductController from '../Controller/ProductController';
@@ -34,7 +35,7 @@ router.get('/product', ProductController.getProduct);
 router.get('/product/:id', ProductController.getOnlyProduct);
 router.post('/product', ProductController.addProduct);
 
-router.get('/wish', WishControler.getWishList);
-router.post('/wish/:id_user/:id_product', userValidator.verifyId, WishControler.addInWishList);
+router.get('/wish', IdValidator.IdUserValidy, WishControler.getWishList);
+router.post('/wish/:id_user/:id_product', IdValidator.verifyId, WishControler.addInWishList);
 
 export default router;

@@ -77,22 +77,3 @@ export const onlyProduct = checkSchema ({
         errorMessage: "Id inválido."
     }
 });
-
-export const verifyId = checkSchema ({
-    id_user: {
-        isLength : {
-            options: {
-                min: 24
-            }
-        },
-        errorMessage: "Id inválido."
-    },
-    id_product: {
-        isLength : {
-            options: {
-                min: 24
-            }
-        },
-        errorMessage: "Id inválido."
-    }
-})
