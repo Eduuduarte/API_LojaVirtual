@@ -29,4 +29,16 @@ export const verifyId = checkSchema ({
         },
         errorMessage: "Id inválido."
     }
+});
+
+export const idWish = checkSchema({
+    id_wish: {
+        trim: true,
+        isLength : {
+            options: {
+                min: 24
+            }
+        },
+        errorMessage: "Id_User inválido.",
+    },
 })

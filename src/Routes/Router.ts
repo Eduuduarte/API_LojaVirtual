@@ -37,5 +37,6 @@ router.post('/product', ProductController.addProduct);
 
 router.get('/wish', IdValidator.IdUserValidy, WishControler.getWishList);
 router.post('/wish/:id_user/:id_product', IdValidator.verifyId, WishControler.addInWishList);
+router.delete('/wish/:id_wish', IdValidator.idWish, WishControler.deleteWish);
 
 export default router;
