@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { Auth } from "../Middlewares/Auth";
-import {Response } from 'express';
 import * as AuthController from '../Controller/AuthController';
 import * as UserController from '../Controller/UserController';
 import * as userValidator  from '../Validator/userValidator';
@@ -10,7 +9,6 @@ import * as CategoryController from '../Controller/CategoryController';
 import * as ProductController from '../Controller/ProductController';
 import * as WishControler from '../Controller/WishController';
 import * as RequestsController from '../Controller/RequestsController';
-import NumberRequest from "../Model/NumberRequest";
 
 const router = Router();
 

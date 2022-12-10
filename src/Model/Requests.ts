@@ -1,19 +1,15 @@
 import {model, Schema} from 'mongoose';
+import { Product } from '../types/Product';
 
-type product = {
-    id_product: string,
-    qtd: number,
-    valorU: number
-}
+
 
 type RequestsType = {
     id_user: string;
-    product: [product];
-    id_Status: string;
+    product: [Product];
+    status: string;
     id_address: string;
     payment: string; 
     dateRequest: Date;
-    requestNumber: number;
 }
 
 const schema = new Schema<RequestsType>({
@@ -25,7 +21,7 @@ const schema = new Schema<RequestsType>({
         type: [],
         required: true
     },
-    id_Status: {
+    status: {
         type: String,
         required: true
     },
@@ -39,10 +35,6 @@ const schema = new Schema<RequestsType>({
     },
     dateRequest: {
         type: Date,
-        required: true
-    },
-    requestNumber: {
-        type: Number,
         required: true
     }
 });
