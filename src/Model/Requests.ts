@@ -1,8 +1,14 @@
 import {model, Schema} from 'mongoose';
 
+type product = {
+    id_product: string,
+    qtd: number,
+    valorU: number
+}
+
 type RequestsType = {
     id_user: string;
-    id_product: string;
+    product: [product];
     id_Status: string;
     id_address: string;
     payment: string; 
@@ -15,8 +21,8 @@ const schema = new Schema<RequestsType>({
         type: String,
         required: true
     },
-    id_product: {
-        type: String,
+    product: {
+        type: [],
         required: true
     },
     id_Status: {
