@@ -16,31 +16,40 @@ router.get('/ping', (req, res) => {
     res.json({ pong: true });
 });
 
+// Rotas para o usuário
 router.post('/user/signup', userValidator.signup, AuthController.signup);
 router.post('/user/signin', userValidator.signin, AuthController.signin);
 router.post('/user/change',userValidator.change, AuthController.changePs);
 
+// Rotas para o dados do usuário
 router.post('/user/data', UserController.addData);
 router.get('/user/data', Auth, UserController.infoData);
 router.put('/user/data', Auth, userValidator.info, UserController.editPhone);
 
+// Rotas para o endereço do usuário
 router.get('/address', Auth, AddressController.getAddress);
 router.post('/address', Auth, AddressController.addAddress);
 router.put('/address/:id', Auth, AddressController.editAddress);
 router.delete('/address/:id', Auth, AddressController.delAddress);
 
-router.get('/category', CategoryController.getCategory);
-router.post('/category', CategoryController.addCategory);
-
-router.get('/product', ProductController.getProduct);
-router.get('/product/:id', ProductController.getOnlyProduct);
-router.post('/product', ProductController.addProduct);
-
+// Rotas da lista de desejos do usuário
 router.get('/wish', IdValidator.IdUserValidy, WishControler.getWishList);
 router.post('/wish/:id_user/:id_product', IdValidator.verifyId, WishControler.addInWishList);
 router.delete('/wish/:id_wish', IdValidator.idWish, WishControler.deleteWish);
 
-router.get('/pedidos', RequestsController.getRequests);
+// Rotas para os pedidos do usuário
+router.get('/pedidos/:id_user', RequestsController.getRequests);
+router.get('/pedido/:id', RequestsController.getOnlyRequest)
 router.post('/pedidos', RequestsController.addRequest);
+
+// Rotas para categoria do produto
+router.get('/category', CategoryController.getCategory);
+router.post('/category', CategoryController.addCategory);
+
+// Rotas para o produto
+router.get('/product', ProductController.getProduct);
+router.get('/product/:id', ProductController.getOnlyProduct);
+router.post('/product', ProductController.addProduct);
+router.put('/product/:id', ProductController.updateProduct);
 
 export default router;

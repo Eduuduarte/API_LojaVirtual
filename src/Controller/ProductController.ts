@@ -73,3 +73,7 @@ export const addProduct = async (req: Request, res: Response) => {
     res.json({ message });
 }
 
+export const updateProduct = async (res: Response, req: Request) => {
+    
+}
+
