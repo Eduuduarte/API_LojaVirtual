@@ -7,6 +7,18 @@ interface filter {
     status: string;
 }
 
+interface product {
+    id: string;
+    description: string;
+    price: number;
+    status: string;
+    amount: number;
+    discount: boolean;
+    valueDiscount: number;
+    star: number;
+    views: number;
+}
+
 export const catchProduct = async (id_category: string, status: string) => {
     const cat = await Category.findById(id_category);
     let filter: Partial<filter> = {};
@@ -65,4 +77,61 @@ export const includeProduct = async (
     const addProduct = await newProduct.save();
 
     return addProduct;
+}
+
+export const editProduct = async (
+    id: string, 
+    description: string, 
+    price: number, 
+    status: string,
+    amount: number,
+    discount: boolean,
+    valueDiscount: number,
+    star: number,
+    views: number,    
+    ) => {
+
+        const validateProduct = await Product.findById(id);
+
+        if(!validateProduct) {
+            return "Produto inexistente!";
+        }
+
+        let productUp: Partial<product> = {};
+
+        if(description) {
+            productUp.description = description;
+        }
+
+        if(price) {
+            productUp.price = price;
+        }
+
+        if(status) {
+            productUp.status = status;
+        }
+
+        if(amount) {
+            productUp.amount = amount;
+        }
+
+        if(discount) {
+            productUp.discount = discount;
+        }
+
+        if (valueDiscount) {
+            productUp.valueDiscount = valueDiscount
+        }
+
+        if(star) {
+            productUp.star = star;
+        }
+
+        if(views) {
+            productUp.views = views;
+        }
+
+        await validateProduct.updateOne(productUp, {where: {id}})
+
+        return validateProduct;
 }

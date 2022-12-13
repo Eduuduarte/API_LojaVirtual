@@ -73,7 +73,13 @@ export const addProduct = async (req: Request, res: Response) => {
     res.json({ message });
 }
 
-export const updateProduct = async (res: Response, req: Request) => {
-    
-}
+export const updateProduct = async ( req: Request, res: Response) => {
+    const {id} = req.params;
 
+    const { description, price, status, amount, discount, valueDiscount, star, views } = req.body;
+
+    const productUp = await ProductService.editProduct(id, description, price, status, amount, discount, valueDiscount, star, views);
+
+
+    res.json({productUp});
+}
