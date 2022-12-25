@@ -1,4 +1,4 @@
-import { Router, Request } from "express";
+import { Router } from "express";
 import { Auth } from "../Middlewares/Auth";
 import * as AuthController from '../Controller/AuthController';
 import * as UserController from '../Controller/UserController';
@@ -11,15 +11,6 @@ import * as WishControler from '../Controller/WishController';
 import * as RequestsController from '../Controller/RequestsController';
 import * as TesteController from '../Controller/TesteController';
 import multer from "multer";
-
-// const storageConfig = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, './tmp');
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.filename + '.png');
-//     }
-// })
 
 const upload = multer({
     storage: multer.memoryStorage(),
