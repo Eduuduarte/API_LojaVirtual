@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { uploadFile } from '../Database/Firebase/firebase';
 import * as ProductService from '../Service/ProductService';
 import Product from '../Model/Product';
 import { ObjectId } from 'mongoose';
@@ -71,6 +72,28 @@ export const addProduct = async (req: Request, res: Response) => {
     }
 
     res.json({ message });
+}
+
+export const attachImage = async (req: Request, res: Response) => {
+    const file = req.file;
+    const { idProduct } = req.params;
+    let message;
+
+    const product = await Product.findById(idProduct);
+
+    if(!file) {
+        message = "favor, adicione um arquivo";
+    } else if(product) {
+        const task = await uploadFile(file as Express.Multer.File);
+
+        const upload = await ProductService.uploadImage(idProduct, task);
+
+        message = `imagem: ${task}`;
+    } else {
+        message = " Produto não encontrado."
+    }
+
+    res.json({message});
 }
 
 export const updateProduct = async ( req: Request, res: Response) => {

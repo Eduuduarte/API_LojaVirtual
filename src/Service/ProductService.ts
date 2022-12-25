@@ -17,20 +17,21 @@ interface product {
     valueDiscount: number;
     star: number;
     views: number;
+    image: string;
 }
 
 export const catchProduct = async (id_category: string, status: string) => {
     const cat = await Category.findById(id_category);
     let filter: Partial<filter> = {};
 
-    if(!cat?.id && id_category) {
+    if (!cat?.id && id_category) {
         return "Categoria não existe!"
     }
-    if(id_category) {
+    if (id_category) {
         filter.id_category = id_category;
     }
 
-    if(status) {
+    if (status) {
         filter.status = status;
     }
 
@@ -40,18 +41,18 @@ export const catchProduct = async (id_category: string, status: string) => {
 }
 
 export const includeProduct = async (
-    id_category: ObjectId, 
-    description: string, 
-    price: number, status: string, 
-    amount: number, image: string, 
-    localization: string, 
-    discount: boolean, 
-    valueDiscount: number, 
+    id_category: ObjectId,
+    description: string,
+    price: number, status: string,
+    amount: number, image: string,
+    localization: string,
+    discount: boolean,
+    valueDiscount: number,
     infoProduct: object) => {
 
-    const descriptionProduct = await Product.findOne({description});
+    const descriptionProduct = await Product.findOne({ description });
 
-    if(descriptionProduct) {
+    if (descriptionProduct) {
         return "Produto já cadastrado!"
     }
 
@@ -79,59 +80,73 @@ export const includeProduct = async (
     return addProduct;
 }
 
+export const uploadImage = async (id: string, imagem: string) => {
+    const validateProduct = await Product.findById(id);
+
+    if(!validateProduct) return "produto não encontrado";
+
+    let imageUp: Partial<product> = {}
+
+    imageUp.image = imagem;
+
+    await validateProduct.updateOne(imageUp, {where: {id}});
+
+    return true;
+}
+
 export const editProduct = async (
-    id: string, 
-    description: string, 
-    price: number, 
+    id: string,
+    description: string,
+    price: number,
     status: string,
     amount: number,
     discount: boolean,
     valueDiscount: number,
     star: number,
-    views: number,    
-    ) => {
+    views: number,
+) => {
 
-        const validateProduct = await Product.findById(id);
+    const validateProduct = await Product.findById(id);
 
-        if(!validateProduct) {
-            return "Produto inexistente!";
-        }
+    if (!validateProduct) {
+        return "Produto inexistente!";
+    }
 
-        let productUp: Partial<product> = {};
+    let productUp: Partial<product> = {};
 
-        if(description) {
-            productUp.description = description;
-        }
+    if (description) {
+        productUp.description = description;
+    }
 
-        if(price) {
-            productUp.price = price;
-        }
+    if (price) {
+        productUp.price = price;
+    }
 
-        if(status) {
-            productUp.status = status;
-        }
+    if (status) {
+        productUp.status = status;
+    }
 
-        if(amount) {
-            productUp.amount = amount;
-        }
+    if (amount) {
+        productUp.amount = amount;
+    }
 
-        if(discount) {
-            productUp.discount = discount;
-        }
+    if (discount) {
+        productUp.discount = discount;
+    }
 
-        if (valueDiscount) {
-            productUp.valueDiscount = valueDiscount
-        }
+    if (valueDiscount) {
+        productUp.valueDiscount = valueDiscount
+    }
 
-        if(star) {
-            productUp.star = star;
-        }
+    if (star) {
+        productUp.star = star;
+    }
 
-        if(views) {
-            productUp.views = views;
-        }
+    if (views) {
+        productUp.views = views;
+    }
 
-        await validateProduct.updateOne(productUp, {where: {id}})
+    await validateProduct.updateOne(productUp, { where: { id } })
 
-        return validateProduct;
+    return validateProduct;
 }

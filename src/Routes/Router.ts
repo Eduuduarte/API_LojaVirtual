@@ -1,14 +1,33 @@
-import { Router } from "express";
+import { Router, Request } from "express";
 import { Auth } from "../Middlewares/Auth";
 import * as AuthController from '../Controller/AuthController';
 import * as UserController from '../Controller/UserController';
-import * as userValidator  from '../Validator/userValidator';
+import * as userValidator from '../Validator/userValidator';
 import * as IdValidator from '../Validator/IdValidator';
 import * as AddressController from '../Controller/AddressController';
 import * as CategoryController from '../Controller/CategoryController';
 import * as ProductController from '../Controller/ProductController';
 import * as WishControler from '../Controller/WishController';
 import * as RequestsController from '../Controller/RequestsController';
+import * as TesteController from '../Controller/TesteController';
+import multer from "multer";
+
+// const storageConfig = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, './tmp');
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.filename + '.png');
+//     }
+// })
+
+const upload = multer({
+    storage: multer.memoryStorage(),
+    fileFilter: (req, file, cb) => {
+        const allowed: string[] = ['image/jpg', 'image/jpeg', 'image/png'];
+        cb(null, allowed.includes(file.mimetype))
+    }
+})
 
 const router = Router();
 
@@ -16,10 +35,12 @@ router.get('/ping', (req, res) => {
     res.json({ pong: true });
 });
 
+router.post('/teste', upload.single('imagem'), TesteController.testandoUpload);
+
 // Rotas para o usuário
 router.post('/user/signup', userValidator.signup, AuthController.signup);
 router.post('/user/signin', userValidator.signin, AuthController.signin);
-router.post('/user/change',userValidator.change, AuthController.changePs);
+router.post('/user/change', userValidator.change, AuthController.changePs);
 
 // Rotas para o dados do usuário
 router.post('/user/data', UserController.addData);
@@ -50,6 +71,7 @@ router.post('/category', CategoryController.addCategory);
 router.get('/product', ProductController.getProduct);
 router.get('/product/:id', ProductController.getOnlyProduct);
 router.post('/product', ProductController.addProduct);
+router.post('/product/:idProduct', upload.single('imagem'), ProductController.attachImage);
 router.put('/product/:id', ProductController.updateProduct);
 
 export default router;
