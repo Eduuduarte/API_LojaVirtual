@@ -73,5 +73,6 @@ router.get('/product/:id', ProductController.getOnlyProduct);
 router.post('/product', ProductController.addProduct);
 router.post('/product/:idProduct', upload.single('imagem'), ProductController.attachImage);
 router.put('/product/:id', ProductController.updateProduct);
+router.delete('/product/:id', ProductController.deleteProduct);
 
 export default router;

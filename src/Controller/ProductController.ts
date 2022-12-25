@@ -106,3 +106,20 @@ export const updateProduct = async ( req: Request, res: Response) => {
 
     res.json({productUp});
 }
+
+export const deleteProduct = async (req: Request, res: Response) => {
+    const {id} = req.params;
+    let message;
+
+    const product = await Product.findById(id);
+
+    if(!product) {
+        message = "produto não existe!"
+    } else {
+        await product.deleteOne();
+        message = "Produto deletado!"
+    }
+
+    res.json({message});
+
+}
