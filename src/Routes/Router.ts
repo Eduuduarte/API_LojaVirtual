@@ -45,14 +45,14 @@ router.put('/address/:id', Auth, AddressController.editAddress);
 router.delete('/address/:id', Auth, AddressController.delAddress);
 
 // Rotas da lista de desejos do usuário
-router.get('/wish', IdValidator.IdUserValidy, WishControler.getWishList);
-router.post('/wish/:id_user/:id_product', IdValidator.verifyId, WishControler.addInWishList);
-router.delete('/wish/:id_wish', IdValidator.idWish, WishControler.deleteWish);
+router.get('/wish',Auth, IdValidator.IdUserValidy, WishControler.getWishList);
+router.post('/wish/:id_user/:id_product',Auth, IdValidator.verifyId, WishControler.addInWishList);
+router.delete('/wish/:id_wish', IdValidator.idWish,Auth, WishControler.deleteWish);
 
 // Rotas para os pedidos do usuário
-router.get('/pedidos/:id_user', RequestsController.getRequests);
-router.get('/pedido/:id', RequestsController.getOnlyRequest)
-router.post('/pedidos', RequestsController.addRequest);
+router.get('/pedidos/:id_user', Auth, RequestsController.getRequests);
+router.get('/pedido/:id', Auth, RequestsController.getOnlyRequest)
+router.post('/pedidos', Auth, RequestsController.addRequest);
 
 // Rotas para categoria do produto
 router.get('/category', CategoryController.getCategory);
