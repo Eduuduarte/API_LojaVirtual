@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { uploadFile } from '../Database/Firebase/firebase';
+import { uploadFile } from '../Service/firebase/firebase';
 
 
 

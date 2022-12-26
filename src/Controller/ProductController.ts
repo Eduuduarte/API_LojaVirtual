@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { uploadFile } from '../Database/Firebase/firebase';
+import { uploadFile } from '../Service/firebase/firebase';
 import * as ProductService from '../Service/ProductService';
 import Product from '../Model/Product';
 import { ObjectId } from 'mongoose';
